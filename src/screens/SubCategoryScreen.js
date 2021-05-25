@@ -41,7 +41,8 @@ class SubCategoryScreen extends React.Component {
         const { navigation } = this.props;
 
         this.state.maincategoryID = this.props.route.params.maincategoryID;
-        this.state.color1 = this.props.route.params.color1;
+        this.state.color1 = this.props.route.params.cat_color1;
+
         console.log('this.state.maincategoryID: ', this.state.maincategoryID);
 
         this.initSubCat();
@@ -322,19 +323,17 @@ class SubCategoryScreen extends React.Component {
                                             let length = this.state.subcategory.length;
                                             let darken = 100;
 
-                                            let calDarken = (index) * darken / (length *3);
-                                            console.log(item)
-                                            if (item.cat2_id != '') {
-                                                return (
-
-                                                    <TouchableOpacity onPress={() => this.getQuerySubProduct1(navigation, item.cat2_id)}>
-                                                        <View style={{ height: 75, width: 75, backgroundColor: LightenDarkenColor(this.state.color1, calDarken), marginRight: 10, borderRadius: 10 }}>
-                                                            <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 15, position: 'absolute', left: 5, bottom: 5, right: 5 }}>{item.cat2_name}</Text>
-                                                        </View>
-                                                    </TouchableOpacity>
-
-                                                )
-                                            }
+                                            let calDarken = (index + 1)  * darken / length;
+                                            
+                                            return(
+                                           
+                                            <TouchableOpacity onPress={() => this.getQuerySubProduct1(navigation, item.cat2_id)}>
+                                                <View style={{height: 75, width: 75, backgroundColor: LightenDarkenColor(this.state.color1, calDarken ), marginRight: 10, borderRadius: 10}}>
+                                                    <Text style={{color: 'white', fontWeight: 'bold', fontSize: 15, position: 'absolute', left: 5, bottom: 5, right: 5}}>{item.cat2_name}</Text>
+                                                </View>
+                                            </TouchableOpacity> 
+                                                   
+                                            )                                       
                                                 } }/>
 
                                 </ScrollView>
@@ -388,7 +387,7 @@ class SubCategoryScreen extends React.Component {
                                                             }
                                                             </View>
                                                             <View style={{flexDirection: 'row', marginTop: 2}}>
-                                                                <Image style={{ height: 12, width: 12, marginRight: 3}} source={require('../../img/user.png')} />
+                                                                <Image style={{ height: 12, width: 12, marginRight: 3, borderRadius: 10}} source={{uri: item.seller_img}} />
                                                                 <Text style={{fontSize: 10}}>{item.seller}</Text>
                                                             </View>
                                                         </View>

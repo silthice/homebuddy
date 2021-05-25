@@ -62,7 +62,6 @@ class SearchScreen extends React.Component {
         console.log('Search Src getPopularSearch: ', result.status);
     }
 
-
     goSearchResultScreen = async (nav) => {
 
         let mlm_id = APIData.mlm_id;
@@ -103,55 +102,8 @@ class SearchScreen extends React.Component {
         this.getSearchHistory()
     }
 
-    goSearchResultScreen2 = async(nav) =>{
 
-        let mlm_id = APIData.mlm_id;
-        let session_no = APIData.session_no;
-        let s_title = this.state.searchText;
-
-        const data = new FormData();
-
-        data.append('mlm_id', mlm_id);
-        data.append('session_no', session_no);
-        data.append('s_title', s_title);
-
-        if (mlm_id == '' && session_no == '') {
-            Alert.alert("Please Login", "Please proceed to login");
-        }
-
-        if (mlm_id !== '' && session_no !== '' && s_title !== '') {
-
-            await fetch(CONSTS.clone_URL + "searchJs", {
-                method: "POST",
-                body: data,
-                header: {
-                    'Content-Type': 'application/form-data',
-                }
-            })
-                .then(response => response.json())
-                .then(response => {
-                    //console.log('response here', response);
-                    if (response.status == true) {
-                        //var x = '';
-                        //x = response.msg;
-                        nav.navigate('SearchResultScreen', {title: s_title, searchProduct: response.list});
-                        
-                        console.log('Search result src : result :', response.list);
-                        //console.log('search screen result: ', data2);
-                    } else {
-                        //var x = '';
-                        //x = response.failed;
-                        //console.log(x[0])
-                        console.log('Search Failed', response.failed[0]);
-                    }
-                })
-           
-        }else{
-            Alert.alert("Please Insert Text", "Please type your product name.");
-        }
-
-    }
-
+  
     pressSearchHitoryP(sTitle){
         this.setState({searchText: sTitle});
         this.setState({});

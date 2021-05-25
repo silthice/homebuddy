@@ -72,14 +72,14 @@ class CategoryScreen extends React.Component {
         }
 
         //console.log('Check category: ', cat1_id);
-        console.log('Category Src getSubCategory: ', result.list);
+        console.log('Category Src getSubCategory: ', result.status);
     }
 
-    goSubCategoryScreen(nav, mainCatID, color1, color2){
+    goSubCategoryScreen(nav, mainCatID, cat_color1, cat_color2){
 
         if(!mainCatID == ''){
             console.log('subCat Main ID : ', mainCatID);
-            nav.navigate('SubCategoryScreen', {maincategoryID: mainCatID, color1: color1, color2: color2});
+            nav.navigate('SubCategoryScreen', {maincategoryID: mainCatID, cat_color1: cat_color1, cat_color2: cat_color2});
         }
     }
     
@@ -127,7 +127,7 @@ class CategoryScreen extends React.Component {
                                 showsVerticalScrollIndicator={false}
                                 renderItem={({ item }) => (
                                     <View style={{ alignItems: 'center' }}>
-                                        <TouchableOpacity onPress={() => this.goSubCategoryScreen(navigation, item.cat1_id, item.cat1_color1, item.cat1_color2)}>
+                                <TouchableOpacity onPress={() => this.goSubCategoryScreen(navigation, item.cat1_id, item.cat1_color1, item.cat1_color2)}>
                                 
                                 <LinearGradient colors={[item.cat1_color1, item.cat1_color2]} style={{ width: screenWidth * 0.445, borderRadius: 15, padding: 10, marginLeft: 0 }}>
                                     <View>

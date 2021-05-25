@@ -55,6 +55,8 @@ class SellerProfileScreen extends React.Component {
         await this.getSellerProductListing();
     }
 
+
+    // wait back create new get seller account or add seller info into searchbysellerjs
     getUserAccount = async () => {
         //May change & get from API data js file
         let mlm_id = APIData.mlm_id;
@@ -121,7 +123,7 @@ class SellerProfileScreen extends React.Component {
             
             this.setState({productLength: productLength});
             this.setState({});
-            console.log('length ========', productLength)
+            console.log('SellerProfile src getSellerProductListing Total seller product : length ========', productLength)
         }
 
         console.log('Seller Profile Src getSellerProductListing: ', result.status);
@@ -495,7 +497,7 @@ class SellerProfileScreen extends React.Component {
                                             }
                                         </View>
                                         <View style={{flexDirection: 'row', marginTop: 2}}>
-                                            <Image style={{ height: 12, width: 12, marginRight: 3}} source={require('../../img/user.png')} />
+                                            <Image style={{ height: 12, width: 12, marginRight: 3, borderRadius: 10}} source={{uri: item.seller_img}} />
                                             <Text style={{fontSize: 10}}>{item.seller}</Text>
                                         </View>
                                     </View>

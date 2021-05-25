@@ -336,7 +336,7 @@ class PostScreen extends React.Component {
                                         'Post Success',
                                          'You are Posted successfully!',
                                         [
-                                            { text: 'OK', onPress: () => nav.navigate('ProfileScreen') }
+                                            { text: 'OK', onPress: () => nav.replace('ProfileScreen') }
                                         ],
                                         { cancelable: false }
                                     );

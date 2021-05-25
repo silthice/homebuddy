@@ -504,11 +504,7 @@ class HomeScreen extends React.Component {
                                             )
                                         })
                                     }
-                                <TouchableOpacity onPress={() => {
-                                    this.setModalVisibleDropDownMenu(false)
-                                    navigation.navigate('NearbySettingScreen')
-
-                                }}>
+                                    <TouchableOpacity onPress={() => navigation.navigate('NearbySettingScreen')}>
                                         <View style={{ alignItems: 'center', flexDirection: 'row', height: 30 }}>
                                             <View style={{ marginLeft: 10 }}>
                                                 <Text style={{ fontSize: 12}}>Nearby Setting</Text>
@@ -592,7 +588,7 @@ class HomeScreen extends React.Component {
                                         }
                                     </View>
                                     <View style={{flexDirection: 'row', marginTop: 2}}>
-                                        <Image style={{ height: 12, width: 12, marginRight: 3}} source={require('../../img/user.png')} />
+                                        <Image style={{ height: 12, width: 12, marginRight: 3, borderRadius: 10}} source={{uri: item.seller_img}} />
                                         <Text style={{fontSize: 10}}>{item.seller}</Text>
                                     </View>
                                 </View>

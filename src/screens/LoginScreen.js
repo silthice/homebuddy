@@ -22,7 +22,7 @@ class LoginScreen extends React.Component {
        super(props);
        this.state = {
 
-          usrOrEmail: 'giaps',
+          usrOrEmail: 'zed',
           pwd: '123456789@',
           //usrOrEmail: 'zed',
           //pwd: '123456789@',

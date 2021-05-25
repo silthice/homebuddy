@@ -44,32 +44,7 @@ class NearbySettingScreen extends React.Component {
   componentDidMount = async () => {
     const { navigation } = this.props;
 
-    //this.initProductDetail();
-
-      this.setState({
-          productLATLNG: { latitude: APIData.latitude, longitude: APIData.longitude },
-          LATLNG: {
-              latitude: APIData.latitude, longitude: APIData.longitude,
-              latitudeDelta: 0.012, longitudeDelta: 0.012
-          }
-      })
-
-      let url = 'https://reverse.geocoder.ls.hereapi.com/6.2/reversegeocode.json';
-      url += '?prox=' + APIData.latitude + ',' + APIData.longitude;
-      url += '&mode=retrieveAddresses&maxResults=1&gen=9&apiKey=' + 'lUXHy4ZjSlIi_QzCAH-UHFYLZrkeN_Yp4pW86T4NIVs';
-      console.log("dsdsdsddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
-      console.log(url);
-
-      let result2 = await new HTTP().get(url);
-      if (result2 != null && result2 != undefined) {
-          console.log("second log");
-          console.log(result2);
-          // Alert.alert("here")
-          let r = result2;
-          let target = r.Response.View[0].Result[0].Location.Address.District + ', ' + r.Response.View[0].Result[0].Location.Address.State + ', ' + r.Response.View[0].Result[0].Location.Address.City;;
-          console.log(target)
-      }
-
+    this.initProductDetail();
 }
 
 initProductDetail = async () => {

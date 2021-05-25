@@ -281,10 +281,7 @@ const { navigation } = this.props;
                 <Header style={{height: 60, backgroundColor: 'white', elevation: 0, marginTop: 30}}>
                 <StatusBar translucent backgroundColor="transparent" barStyle="dark-content" />
                     <Left style={{flex: 0.1}}>
-                        <Button transparent onPress={() => {
-                            navigation.navigate('HomeScreen')
-                            //navigation.goBack()
-                        }}>
+                        <Button transparent onPress={() => navigation.navigate('HomeScreen')}>
                             <Image style={{ height: 25, width: 25 }} source={require('../../img/back-icon.png')} />
                         </Button>
                     </Left>
@@ -350,7 +347,7 @@ const { navigation } = this.props;
                                         }
                                         </View>
                                         <View style={{flexDirection: 'row', marginTop: 2}}>
-                                            <Image style={{ height: 12, width: 12, marginRight: 3}} source={require('../../img/user.png')} />
+                                            <Image style={{ height: 12, width: 12, marginRight: 3, borderRadius: 10}} source={{uri: item.seller_img}} />
                                             <Text style={{fontSize: 10}}>{item.seller}</Text>
                                         </View>
                                     </View>

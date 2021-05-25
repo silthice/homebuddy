@@ -112,15 +112,10 @@ class SignUpScreen extends React.Component {
 
     registerUser = async (nav) => {
 
-        //let username = this.state.username;
-        //let email = this.state.email;
-        //let password = this.state.password;
-        //let confirm_pwd = this.state.confirmPassword;
-
-        let username = 'giaps';
-        let email = 'ryonlim@hotmail.com';
-        let password = '123456789@';
-        let confirm_pwd = '123456789@';
+        let username = this.state.username;
+        let email = this.state.email;
+        let password = this.state.password;
+        let confirm_pwd = this.state.confirmPassword;
 
         const data = new FormData();
 

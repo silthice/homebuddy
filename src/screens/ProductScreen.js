@@ -10,6 +10,7 @@ import CONSTS from '../config/constants';
 import MapView, { Marker, PROVIDER_GOOGLE, Polyline, Polygon } from 'react-native-maps';
 
 import { decode } from "@mapbox/polyline";
+import LinearGradient from 'react-native-linear-gradient';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -39,6 +40,9 @@ class ProductScreen extends React.Component {
             pPrice:'',
             currentIndex: 1,
             pImages: [],
+            sImages: '',
+            color1: 'white',
+            color2: 'white',
             similarProduct: [],
             sellerRelatedProduct: [],
             modalVisibleDropDownMenu: false,
@@ -48,6 +52,9 @@ class ProductScreen extends React.Component {
             mapRegion: null,
             currentLatitude: null,
             currentLongitude: null,
+            pView: '',
+            pfav: '',
+            pSellerRate: 0,
             LATLNG: {
                 latitude: 0.00,
                 longitude: 0.00,
@@ -58,9 +65,6 @@ class ProductScreen extends React.Component {
                 latitude: 0.00,
                 longitude: 0.00,
             },
-            pView: '',
-            pfav: '',
-            pSellerRate: 0,
             
             //pointPolygon: [{"latitude": 3.16551, "longitude": 101.64101}, {"latitude": 3.1656, "longitude": 101.64275}, {"latitude": 3.16535, "longitude": 101.64319}, {"latitude": 3.16549, "longitude": 101.64366}, {"latitude": 3.16521, "longitude": 101.64445}, {"latitude": 3.16511, "longitude": 101.64476}, {"latitude": 3.16532, "longitude": 101.64572}, {"latitude": 3.1654, "longitude": 101.64636}, {"latitude": 3.16544, "longitude": 101.64666}, {"latitude": 3.16531, "longitude": 101.64846}, {"latitude": 3.1652, "longitude": 101.6504}, {"latitude": 3.16507, "longitude": 101.65251}, {"latitude": 3.16512, "longitude": 101.65379}, {"latitude": 3.16522, "longitude": 101.65431}, {"latitude": 3.16541, "longitude": 101.65455}, {"latitude": 3.16585, "longitude": 101.65518}, {"latitude": 3.16627, "longitude": 101.65562}, {"latitude": 3.16703, "longitude": 101.65632}, {"latitude": 3.16806, "longitude": 101.65733}, {"latitude": 3.16876, "longitude": 101.65829}, {"latitude": 3.16946, "longitude": 101.65924}, {"latitude": 3.16989, "longitude": 101.65994}, {"latitude": 3.17017, "longitude": 101.66017}, {"latitude": 3.17039, "longitude": 101.66032}, {"latitude": 3.17088, "longitude": 101.66033}, {"latitude": 3.17158, "longitude": 101.66033}, {"latitude": 3.17239, "longitude": 101.6604}, {"latitude": 3.17306, "longitude": 101.66052}, {"latitude": 3.17531, "longitude": 101.66129}, {"latitude": 3.17569, "longitude": 101.6613}, {"latitude": 3.17606, "longitude": 101.66122}, {"latitude": 3.1763, "longitude": 101.66103}, {"latitude": 3.17675, "longitude": 101.66081}, {"latitude": 3.17684, "longitude": 101.66047}, {"latitude": 3.17694, "longitude": 101.65997}, {"latitude": 3.17542, "longitude": 101.65679}, {"latitude": 3.17516, "longitude": 101.65592}, {"latitude": 3.17507, "longitude": 101.65454}, {"latitude": 3.17472, "longitude": 101.65416}, {"latitude": 3.17479, "longitude": 101.65304}, {"latitude": 3.17502, "longitude": 101.65306}, {"latitude": 3.17506, "longitude": 101.65106}, {"latitude": 3.17481, "longitude": 101.65076}, {"latitude": 3.17493, "longitude": 101.6486}, {"latitude": 3.17522, "longitude": 101.64644}, {"latitude": 3.17453, "longitude": 101.6465}, {"latitude": 3.17432, "longitude": 101.64941}, {"latitude": 3.17352, "longitude": 101.64942}, {"latitude": 3.17349, "longitude": 101.65012}, {"latitude": 3.17347, "longitude": 101.6506}, {"latitude": 3.17315, "longitude": 101.65056}, {"latitude": 3.17265, "longitude": 101.64994}, {"latitude": 3.17246, "longitude": 101.64975}, {"latitude": 3.17241, "longitude": 101.64905}, {"latitude": 3.1724, "longitude": 101.64893}, {"latitude": 3.17408, "longitude": 101.64843}, {"latitude": 3.17394, "longitude": 101.64809}, {"latitude": 3.17346, "longitude": 101.64822}, {"latitude": 3.17214, "longitude": 101.64837}, {"latitude": 3.17205, "longitude": 101.64838}, {"latitude": 3.17013, "longitude": 101.64767}, {"latitude": 3.17001, "longitude": 101.64771}, {"latitude": 3.16824, "longitude": 101.64631}, {"latitude": 3.16791, "longitude": 101.64637}, {"latitude": 3.16427, "longitude": 101.6456}, {"latitude": 3.16382, "longitude": 101.64299}, {"latitude": 3.16368, "longitude": 101.64299}],
         }
@@ -89,27 +93,28 @@ class ProductScreen extends React.Component {
         await this.getSimilarProduct();
     }
 
+    
     getProductDetail = async () => {
 
         let p_id = this.state.productID;
+        console.log('product scr getProductDetail', p_id)
         
         let result = await new HTTP().post(CONSTS.clone_URL + 'productDetailJs', {p_id});
 
         if (result.status){
             this.setState({ pName: result.product.p_name, pDesc: result.product.p_desc,
-                            pImages: result.product.p_images, sellerName: result.product.p_seller_name,
+                            pImages: result.product.p_images, sImages: result.product.seller_img, sellerName: result.product.p_seller_name,
                             sellerPostBy: result.product.p_post_by, cat: result.product.p_cat1_name, 
-                            pPrice: result.product.p_price, pView: result.product.p_view, pfav: result.product.total_fav,
+                            pPrice: result.product.p_price, color1: result.product.color_1, color2: result.product.color_2,
+                            pView: result.product.p_view, pfav: result.product.total_fav,
                             productLATLNG:{latitude: result.product.p_lat, longitude: result.product.p_lng},
                             LATLNG:{latitude: result.product.p_lat, longitude: result.product.p_lng, 
-                    latitudeDelta: 0.012, longitudeDelta: 0.012
-                }
-            })
+                                     latitudeDelta: 0.012, longitudeDelta: 0.012}})
 
-            let average = (result.product.seller_manners + result.product.seller_negotiation + result.product.seller_punctuality + result.product.seller_response) / 4
+        let average = (result.product.seller_manners + result.product.seller_negotiation + result.product.seller_punctuality + result.product.seller_response) / 4
 
-            console.log('average up isssssssssssssssss', average)
-            this.setState({ pSellerRate: average })
+        console.log('Product Src average up isssssssssssssssss', average)
+        this.setState({ pSellerRate: average })
         }
 
         console.log('Product Src Product location : ', this.state.productLATLNG);
@@ -275,6 +280,7 @@ class ProductScreen extends React.Component {
         let mlm_id = APIData.mlm_id;
         let session_no = APIData.session_no;
         let p_id = this.state.productID;
+        console.log(mlm_id, session_no)
 
         let result = await new HTTP().post(CONSTS.clone_URL + 'myFavouriteJs', {mlm_id, session_no});
 
@@ -367,7 +373,7 @@ class ProductScreen extends React.Component {
 
                     <View style={{flexDirection: 'row', alignItems: 'center', padding: 15, marginTop: -60}}>
                         <TouchableOpacity onPress={() => this.goSellerProfileScr(navigation)} style={{flexDirection: 'row', alignItems: 'center'}}>
-                            <Image style={{ height: 40, width: 40 }} source={require('../../img/user.png')} />
+                            <Image style={{ height: 40, width: 40, borderRadius: 20 }} source={{uri: this.state.sImages}} />
                             <View style={{marginLeft: 5}}>
                                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                                     <Text style={{fontWeight: 'bold', fontSize: 14, marginRight: 10}}>{this.state.sellerName}</Text>
@@ -387,7 +393,7 @@ class ProductScreen extends React.Component {
                                 innerRadius={15}
                                 sections={[
                                     {
-                                        percentage:  this.state.pSellerRate ,
+                                    percentage: this.state.pSellerRate,
                                     color: '#FF7A59',
                                     },
                                 ]}
@@ -398,8 +404,8 @@ class ProductScreen extends React.Component {
                                 >
                                 <Text
                                     style={styles.gaugeText}
-                                    >
-                                        {this.state.pSellerRate}%
+                                >
+                                    {this.state.pSellerRate}%
                                 </Text>
                                 </View>
                             </View>
@@ -416,15 +422,15 @@ class ProductScreen extends React.Component {
                                 <Image style={{ height: 12, width: 12}} source={require('../../img/location-icon-white.png')} />
                                 <Text style={{color: 'white', fontSize: 10}}>1.95KM</Text>
                             </View>
-                            <View style={{backgroundColor: '#D68EBC', borderRadius: 5, flexDirection: 'row', alignItems: 'center', padding: 3, marginTop: 5, justifyContent: 'center', paddingLeft: 10, paddingRight: 10}}>
+                            <LinearGradient colors= {[this.state.color1, this.state.color2]} style={{borderRadius: 5, flexDirection: 'row', alignItems: 'center', padding: 3, marginTop: 5, justifyContent: 'center', paddingLeft: 10, paddingRight: 10}}>
                                 <Text style={{color: 'white', fontSize: 10}}>{this.state.cat}</Text>
-                            </View>
+                            </LinearGradient>
                         </View>
                         <View style={{marginTop: 15}}>
                             <Text style={{fontSize: 13, textAlign: 'justify', marginBottom: 10}}>{this.state.pDesc}</Text>
                         </View>
-                        <View style={{ marginTop: 10 }}>
-                            <Text style={{ color: '#808080', fontSize: 10 }}>{this.state.sellerPostBy} • {this.state.pfav} favourites • {this.state.pView} views</Text>
+                        <View style={{marginTop: 10}}>
+                        <Text style={{ color: '#808080', fontSize: 10 }}>{this.state.sellerPostBy} • {this.state.pfav} favourites • {this.state.pView} views</Text>
                         </View>
                     </View>
                    
@@ -531,12 +537,12 @@ class ProductScreen extends React.Component {
                                                     <Text style={{fontWeight: 'bold', fontSize: 13}}>{item.p_name}</Text>
                                                 }
                                             </View>
-                                            {/*
+                                            
                                             <View style={{flexDirection: 'row', marginTop: 2}}>
-                                                <Image style={{ height: 12, width: 12, marginRight: 3}} source={require('../../img/user.png')} />
+                                                <Image style={{ height: 12, width: 12, marginRight: 3, borderRadius: 10}} source={{uri: item.seller_img}} />
                                                 <Text style={{fontSize: 10}}>{item.seller}</Text>
                                             </View>
-                                            */}
+                                           
                                         </View>
                                         </TouchableOpacity>
 
@@ -608,7 +614,7 @@ class ProductScreen extends React.Component {
                                                 }
                                             </View>
                                             <View style={{flexDirection: 'row', marginTop: 2}}>
-                                                <Image style={{ height: 12, width: 12, marginRight: 3}} source={require('../../img/user.png')} />
+                                                <Image style={{ height: 12, width: 12, marginRight: 3, borderRadius: 10}} source={{uri: item.seller_img}} />
                                                 <Text style={{fontSize: 10}}>{item.seller}</Text>
                                             </View>
                                         </View>

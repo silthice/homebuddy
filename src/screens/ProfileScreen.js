@@ -122,7 +122,7 @@ class ProfileScreen extends React.Component {
         }
 
 
-        console.log('Profile Src getUserProductListing: ', result.status);
+        console.log('Profile Src getUserProductListing: ', result.list);
     }
     
     
@@ -495,7 +495,7 @@ class ProfileScreen extends React.Component {
                                             }
                                         </View>
                                         <View style={{flexDirection: 'row', marginTop: 2}}>
-                                            <Image style={{ height: 12, width: 12, marginRight: 3}} source={require('../../img/user.png')} />
+                                            <Image style={{ height: 12, width: 12, marginRight: 3, borderRadius: 10}} source={{uri: item.seller_img}} />
                                             <Text style={{fontSize: 10}}>{item.seller}</Text>
                                         </View>
                                     </View>
