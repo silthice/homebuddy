@@ -620,7 +620,7 @@ class PostScreen extends React.Component {
                             <View style={{marginTop: 20}}>
                                 <Text style={{fontWeight: 'bold'}}>Price</Text>
                                 <View style={{backgroundColor: '#F1F1F1', width: screenWidth * 0.9, height: 40, justifyContent: 'center', marginTop: 5, borderRadius: 5, flexDirection: 'row'}}>
-                                    <Input style={{padding: 10, fontSize: 14, width: 40}} keyboardType={'numeric'} value={this.state.priceInput} onChangeText={(priceInput) => this.priceChange(priceInput)}/>
+                                    <Input style={{padding: 10, fontSize: 14, width: 40, marginTop: -5}} keyboardType={'numeric'} value={this.state.priceInput} onChangeText={(priceInput) => this.priceChange(priceInput)}/>
                                     <Button onPress={() => this.setState({priceInput: '0'})} style={{alignItems: 'center', justifyContent: 'center', backgroundColor: 'white', borderRadius: 5, borderColor: '#FF3333', borderWidth: 2, elevation: 0, width: screenWidth * 0.2, height: 35, marginTop: 3, marginRight: 3}}>
                                         <Text style={{color: '#FF3333', fontWeight: 'bold'}}>FREE</Text>
                                     </Button>
