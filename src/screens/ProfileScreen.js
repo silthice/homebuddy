@@ -118,11 +118,11 @@ class ProfileScreen extends React.Component {
             
             this.setState({productLength: productLength});
             this.setState({});
-            console.log('length ========', productLength)
+            console.log('Product listing : length ========', productLength)
         }
 
 
-        console.log('Profile Src getUserProductListing: ', result.list);
+        console.log('Profile Src getUserProductListing: ', result.status);
     }
     
     
@@ -294,6 +294,25 @@ class ProfileScreen extends React.Component {
         this.closeDrawerRight();
     }
 
+    goBack = async (nav) =>{
+
+        if(APIData.currentScreen != ''){
+
+            if(APIData.currentScreen == 'AccountScreen'){
+                nav.navigate('AccountScreen')
+            }
+            if(APIData.currentScreen == 'HomeScreen'){
+                nav.navigate('HomeScreen')
+            }
+            if(APIData.currentScreen == 'CategoryScreen'){
+                nav.navigate('CategoryScreen')
+            }
+            if(APIData.currentScreen == 'MessageScreen'){
+                nav.navigate('CategoryScreen')
+            }
+        }
+    }
+
 
     render() {
 
@@ -306,7 +325,7 @@ class ProfileScreen extends React.Component {
              <Header style={{height: 60, backgroundColor: 'white', elevation: 0, marginTop: 30}}>
             <StatusBar translucent backgroundColor="transparent" barStyle="dark-content" />
                 <Left style={{flex: 1}}>
-                    <Button transparent onPress={() => navigation.goBack()}>
+                    <Button transparent onPress={() => this.goBack(navigation)}>
                         <Image style={{ height: 25, width: 25 }} source={require('../../img/back-icon.png')} />
                     </Button>
                 </Left>

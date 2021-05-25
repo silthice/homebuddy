@@ -326,12 +326,20 @@ class SubCategoryScreen extends React.Component {
                                             let calDarken = (index + 1)  * darken / length;
                                             
                                             return(
-                                           
-                                            <TouchableOpacity onPress={() => this.getQuerySubProduct1(navigation, item.cat2_id)}>
-                                                <View style={{height: 75, width: 75, backgroundColor: LightenDarkenColor(this.state.color1, calDarken ), marginRight: 10, borderRadius: 10}}>
-                                                    <Text style={{color: 'white', fontWeight: 'bold', fontSize: 15, position: 'absolute', left: 5, bottom: 5, right: 5}}>{item.cat2_name}</Text>
-                                                </View>
-                                            </TouchableOpacity> 
+                                            <View>
+                                                {
+                                                    item.cat2_id != ''?
+                                                    
+                                                    <TouchableOpacity onPress={() => this.getQuerySubProduct1(navigation, item.cat2_id)}>
+                                                         <View style={{height: 75, width: 75, backgroundColor: LightenDarkenColor(this.state.color1, calDarken ), marginRight: 10, borderRadius: 10}}>
+                                                            <Text style={{color: 'white', fontWeight: 'bold', fontSize: 15, position: 'absolute', left: 5, bottom: 5, right: 5}}>{item.cat2_name}</Text>
+                                                        </View>
+                                                    </TouchableOpacity> 
+                                                    :
+                                                    null
+                                                }
+                                            </View>
+                                          
                                                    
                                             )                                       
                                                 } }/>

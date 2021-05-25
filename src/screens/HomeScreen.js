@@ -73,6 +73,8 @@ class HomeScreen extends React.Component {
 
       this.focusListener = navigation.addListener('focus', () => {
  
+        APIData.currentScreen = 'HomeScreen';
+
             this.initgetInfo();
         });
 

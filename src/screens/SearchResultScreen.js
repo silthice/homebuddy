@@ -281,7 +281,7 @@ const { navigation } = this.props;
                 <Header style={{height: 60, backgroundColor: 'white', elevation: 0, marginTop: 30}}>
                 <StatusBar translucent backgroundColor="transparent" barStyle="dark-content" />
                     <Left style={{flex: 0.1}}>
-                        <Button transparent onPress={() => navigation.navigate('HomeScreen')}>
+                        <Button transparent onPress={() => navigation.navigate('SearchScreen')}>
                             <Image style={{ height: 25, width: 25 }} source={require('../../img/back-icon.png')} />
                         </Button>
                     </Left>
@@ -306,7 +306,18 @@ const { navigation } = this.props;
 
                 <Content>
                     <ScrollView>
-                    <View style={{alignItems: 'flex-start', width: screenWidth}}>
+                    {
+                        this.state.searchText == '' ?
+
+                        <View style={{alignItems: 'center', height: screenHeight}}>
+                            <View style={{height: screenHeight * 0.45}}></View>
+                            <View><Text>Product is not found</Text></View>
+                            <View style={{height: screenHeight * 0.45}}></View>
+                        </View>
+
+                        :
+
+                        <View style={{alignItems: 'flex-start', width: screenWidth}}>
                         <View style={{alignItems: 'flex-start', width: screenWidth * 0.95, marginLeft: 10}}>
                         <FlatList
                             data={this.state.searchproduct}
@@ -363,6 +374,8 @@ const { navigation } = this.props;
                         </View>
                     
                     </View>
+                    }
+                    
                     </ScrollView>
 
                 </Content>

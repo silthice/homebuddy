@@ -87,12 +87,14 @@ class SearchScreen extends React.Component {
                 //x = response.msg;
                 nav.navigate('SearchResultScreen', { title: s_title, searchProduct: result.list });
 
-                console.log('Search result src : result :', result.list);
+                console.log('Search result src : result :', result.status);
                 //console.log('search screen result: ', data2);
             } else {
                 //var x = '';
                 //x = response.failed;
                 //console.log(x[0])
+                nav.navigate('SearchResultScreen', { title: '' });
+
                 console.log('Search Failed', result.errors[0]);
             }
         } else {

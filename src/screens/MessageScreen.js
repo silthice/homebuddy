@@ -1,8 +1,9 @@
 import React from 'react'
 import { StyleSheet, View, Text, ImageBackground, Dimensions, StatusBar, Image, AppRegistry, ScrollView, TouchableOpacity, Modal, TouchableWithoutFeedback } from 'react-native'
 import { Container, Header, Title, Button, Icon, Left, Right, Body, Item, Input, Card, CardItem, Footer, FooterTab, Content, Thumbnail, Tab, Tabs, ScrollableTab  } from "native-base";
-
-
+import HTTP from '../api/http';
+import CONSTS from '../config/constants';
+import APIData from '../api/data';
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 
@@ -13,6 +14,21 @@ class MessageScreen extends React.Component {
          navigation('HomeScreen');
     };
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+        }
+    }
+
+    componentDidMount = async () => {
+      
+        const { navigation } = this.props;
+
+          this.focusListener = navigation.addListener('focus', () => {
+            APIData.currentScreen = 'MessageScreen';
+        });
+    }
 
 
 

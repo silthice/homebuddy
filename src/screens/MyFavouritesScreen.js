@@ -56,7 +56,7 @@ class MyFavouritesScreen extends React.Component {
             this.setState({ myFavourite: result.list })
         }
         //console.log('APIDATA : ', APIData);
-        console.log('My Favourite Src getMyFavourite: ', result.list);
+        console.log('My Favourite Src getMyFavourite: ', result.status);
     }
 
     removeFav = async(fav_id) =>{

@@ -5,7 +5,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import HTTP from '../api/http';
 import CONSTS from '../config/constants';
 import MasonryList from '@react-native-seoul/masonry-list';
-
+import APIData from '../api/data';
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 
@@ -28,11 +28,13 @@ class CategoryScreen extends React.Component {
     }
 
     componentDidMount = async () => {
-        // this.focusListener = navigation.addListener('focus', () => {
-        //     this.setState({ modalVisibleDropDownMenu: false, });
-        // });
+      
         const { navigation } = this.props;
         this.initCat();
+
+          this.focusListener = navigation.addListener('focus', () => {
+            APIData.cuurentScreen = 'CategoryScreen';
+        });
     }
 
     initCat = async () => {

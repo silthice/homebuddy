@@ -35,6 +35,7 @@ class AccountScreen extends React.Component {
 
          this.focusListener = navigation.addListener('focus', () => {
            this.initUserAccount();
+           APIData.currentScreen = 'AccountScreen'
         });
 
     }
