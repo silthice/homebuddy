@@ -35,6 +35,7 @@ class SellerProfileScreen extends React.Component {
             myProductList: [],
             myFollowingLst: [],
             followed: false,
+            locationTitle: '',
             modalVisibleFilter: false,
         }
     }
@@ -50,29 +51,28 @@ class SellerProfileScreen extends React.Component {
     }
 
     initInfo = async () => {
-        await this.getUserAccount();
+        await this.getSellerAccount();
         await this.getFollowingList();
         await this.getSellerProductListing();
     }
 
 
-    // wait back create new get seller account or add seller info into searchbysellerjs
-    getUserAccount = async () => {
-        //May change & get from API data js file
-        let mlm_id = APIData.mlm_id;
-        let session_no = APIData.session_no;
+    getSellerAccount = async () => {
 
-        let result = await new HTTP().post(CONSTS.clone_URL + 'myProfileJs', {mlm_id, session_no});
+        let seller_id = this.state.sellerID
+        
+        let result = await new HTTP().post(CONSTS.clone_URL + 'sellerProfileJs', {seller_id});
 
         if (result.status){
             this.setState({ chkSellerID: result.user.id, mlm_id: result.user.mlm_id, userprofileimg: result.user.profile_pic, 
                             username: result.user.username, manners: result.user.manners, nego: result.user.negotiation,
-                            response: result.user.response, punctuality: result.user.punctuality})
+                            response: result.user.response, punctuality: result.user.punctuality, locationTitle: result.user.user_location_title})
         }
 
         this.calOverallPersonality();
-        console.log('Seller Profile Src getUserAccount: ', result.status);
+        console.log('Seller Profile Src getSellerAccount: ', result.status);
     }
+
 
     calOverallPersonality(){
 
@@ -327,7 +327,7 @@ class SellerProfileScreen extends React.Component {
                                         <Text style={{color: 'white', fontSize: 10}}>Champ</Text>
                                     </View>
                                 </View>
-                                <Text style={{color: '#808080', fontSize: 10}}>Mont Kiara</Text>
+                                <Text style={{color: '#808080', fontSize: 10}}>{this.state.locationTitle}</Text>
                             </View>
                         </View>
 
