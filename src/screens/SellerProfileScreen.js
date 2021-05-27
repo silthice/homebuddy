@@ -318,7 +318,13 @@ class SellerProfileScreen extends React.Component {
                 <View style={{marginLeft: 10, marginRight: 10}}>
                     <View style={{flexDirection: 'row', alignItems: 'center'}}>
                         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                            <Image style={{ height: 55, width: 55, borderRadius: 50 }} source={{uri: this.state.userprofileimg}} />
+                            {
+                                this.state.userprofileimg == ''?
+
+                                <Image style={{ height: 55, width: 55, borderRadius: 50 }}  source={require('../../img/user.png')} />
+                                :
+                                 <Image style={{ height: 55, width: 55, borderRadius: 50 }} source={{uri: this.state.userprofileimg}} />
+                            }
                             <View style={{marginLeft: 5}}>
                                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                                     <Text style={{fontWeight: 'bold', fontSize: 14, marginRight: 10}}>{this.state.username}</Text>
