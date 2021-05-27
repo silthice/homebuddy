@@ -527,8 +527,10 @@ class HomeScreen extends React.Component {
                     <StatusBar translucent backgroundColor="transparent" barStyle="dark-content" />
                         <Left style={{flex: 1}}>
                             <Button onPress={() => this.setModalVisibleDropDownMenu(true)} transparent>
+                                <View style={{flexDirection: 'row', alignItems: 'center'}}>
                                 <Text style={{fontWeight: 'bold', fontSize: 20}}>{this.state.locationTitle}</Text>
                                 <Image style={{ height: 10, width: 10, marginLeft: 5 }} source={require('../../img/down-icon.png')} />
+                                </View>
                             </Button>
                         </Left>
                         <Body style={{flex: 1}}>

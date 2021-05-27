@@ -131,7 +131,7 @@ class CategoryScreen extends React.Component {
                                     <View style={{ alignItems: 'center' }}>
                                 <TouchableOpacity onPress={() => this.goSubCategoryScreen(navigation, item.cat1_id, item.cat1_color1, item.cat1_color2)}>
                                 
-                                <LinearGradient colors={[item.cat1_color1, item.cat1_color2]} style={{ width: screenWidth * 0.445, borderRadius: 15, padding: 10, marginLeft: 0 }}>
+                                <LinearGradient colors={[item.cat1_color1, item.cat1_color2]} style={{ width: screenWidth * 0.465, borderRadius: 15, padding: 10, marginLeft: 0 }}>
                                     <View>
                                         <View style={{height: 40}}>
                                             <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>{item.cat1_name}</Text>
