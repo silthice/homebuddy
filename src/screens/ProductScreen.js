@@ -118,7 +118,7 @@ class ProductScreen extends React.Component {
         }
 
         console.log('Product Src Product location : ', this.state.productLATLNG);
-        console.log('Product Src getProductDetail: ', result);
+        console.log('Product Src getProductDetail: ', result.status);
     }
 
     ProductImgList(nav, itemList, index) {
@@ -373,7 +373,12 @@ class ProductScreen extends React.Component {
 
                     <View style={{flexDirection: 'row', alignItems: 'center', padding: 15, marginTop: -60}}>
                         <TouchableOpacity onPress={() => this.goSellerProfileScr(navigation)} style={{flexDirection: 'row', alignItems: 'center'}}>
-                            <Image style={{ height: 40, width: 40, borderRadius: 20 }} source={{uri: this.state.sImages}} />
+                            {
+                                this.state.sImages == ''?
+                                <Image style={{ height: 40, width: 40, borderRadius: 20 }} source={require('../../img/user.png')} />
+                                                                :
+                                <Image style={{ height: 40, width: 40, borderRadius: 20 }} source={{uri: this.state.sImages}} />
+                            }
                             <View style={{marginLeft: 5}}>
                                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                                     <Text style={{fontWeight: 'bold', fontSize: 14, marginRight: 10}}>{this.state.sellerName}</Text>
@@ -494,7 +499,7 @@ class ProductScreen extends React.Component {
                         }
                        
                        
-                        <View style={{alignItems:'flex-start', width: screenWidth}}>
+                        <View style={{alignSelf:'center'}}>
                         
                             <View style={{alignItems: 'flex-start', width: screenWidth * 0.95, marginLeft: 2}}>
                                 
@@ -537,11 +542,7 @@ class ProductScreen extends React.Component {
                                                     <Text style={{fontWeight: 'bold', fontSize: 13}}>{item.p_name}</Text>
                                                 }
                                             </View>
-                                            
-                                            <View style={{flexDirection: 'row', marginTop: 2}}>
-                                                <Image style={{ height: 12, width: 12, marginRight: 3, borderRadius: 10}} source={{uri: item.seller_img}} />
-                                                <Text style={{fontSize: 10}}>{item.seller}</Text>
-                                            </View>
+
                                            
                                         </View>
                                         </TouchableOpacity>
